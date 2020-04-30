@@ -1,0 +1,308 @@
+@import "./common.scss";
+
+div,p,span{
+	color: $font-color-lable;
+}
+/* 通用属性 */
+.gh-main{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+.gh-content{
+	background-color:$bg-color ;
+	padding:$padding;
+}
+/* input输入框 */
+.gh-input{
+	.gh-input-inner{
+		width: 100%;
+		padding:0 0.625rem;
+		line-height:1.75rem;
+		box-sizing: border-box;
+		border: 1px solid $gh-input-border-color;
+		&.gh-input-border-top{
+			border-width: 0px;
+			border-top-width:1px;
+		}
+		&.gh-input-border-bottom{
+			border-width: 0px;
+			border-bottom-width:1px;
+		}
+		&.gh-input-border-left{
+			border-width: 0px;
+			border-left-width:1px;
+		}
+		&.gh-input-border-right{
+			border-width: 0px;
+			border-right-width:1px;
+		}
+	};
+	.gh-input-inner:focus{
+		border-color:$gh-input-border-color-active;
+	}
+};
+/* 按钮控件 */
+.gh-button{
+	outline: none;
+	padding:0.75rem 1.25rem;
+	color: #333333;
+	text-align: center;
+	&.gh-button-primary{
+		color: #fff;	
+		background-color: $gh-button-primary;
+		border: 1px solid $gh-button-primary;
+		&:active{
+			opacity: 1;
+		}
+	}
+	&.gh-button-success{
+		color: #fff;
+		background-color: $gh-button-success;
+		border: 1px solid $gh-button-success;
+		&:active{
+			opacity: 1;
+		}
+	};
+	&.gh-button-info{
+		color: #fff;
+		background-color: $gh-button-info;
+		border: 1px solid $gh-button-info;
+		&:active{
+			opacity: 1;
+		}
+	};
+	&.gh-button-warning{
+		color: #fff;
+		background-color: $gh-button-warning;
+		border: 1px solid $gh-button-warning;
+		&:active{
+			opacity: 1;
+		}
+	};
+	&.gh-button-danger{
+		color: #fff;
+		background-color: $gh-button-danger;
+		border: 1px solid $gh-button-danger;
+		&:active{
+			opacity: 1;
+		}
+	};
+	// 按钮大小
+	&.gh-button-medium{
+		padding: 0.625rem 1.25rem;
+		font-size: 0.875rem;
+	}
+	&.gh-button-small{
+		padding: 0.5625rem 0.9375rem;
+		font-size: 0.75rem;
+	}
+	&.gh-button-mini{
+		padding: 0.4375rem 0.9375rem;
+		font-size: 0.75rem;
+	}
+	&:hover{
+		opacity: 0.8;
+	}
+	
+}
+
+
+/* 复选框 */
+.gh-checkbox{
+	cursor: pointer;
+	display: inline-block;
+	input[type="checkbox"]{
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		cursor: pointer;
+		border: 4px solid #A8A9AD;
+		width: 0.9375rem;
+		height: 0.9375rem;
+	}
+	input[type="checkbox"]:checked{
+		background-color: #DA262D;
+	};
+	.gh-checkbox-input{
+		vertical-align: middle;
+	}
+	.gh-checkbox-label{
+		vertical-align: middle;
+		font-size: 0.875rem;
+	}
+}
+
+/* 单选框 */
+.gh-radio{
+ cursor: pointer;
+ input[type="radio"]{
+	 -webkit-appearance: none;
+	 -moz-appearance: none;
+	 -ms-appearance: none;
+	 appearance: none;	 
+	 border-radius: 50%;
+	 cursor: pointer;
+ 	border: 4px solid #A8A9AD;
+ 	width: 0.9375rem;
+ 	height: 0.9375rem;
+ }
+ input[type="radio"]:checked{
+ 	background-color: #DA262D;
+ }
+ .gh-radio-input{
+ 	vertical-align: middle;
+ }
+ .gh-radio-label{
+ 	vertical-align: middle;
+ 	font-size: 0.875rem;
+ }
+}
+/* select 下拉列表 */ 
+.gh-select{
+		width: 240px;
+		position: relative;
+		.gh-select-input{
+			width: 100%;
+			position: relative;
+			input{
+				width: 100%;
+				padding:0 0.625rem;
+				line-height:1.75rem;
+				box-sizing: border-box;
+				border: 1px solid $gh-input-border-color;
+				cursor: pointer;
+			};
+			.iconfont{
+				position: absolute;
+				top: 50%;
+				right: 10px;
+				margin-top: -9px;
+			}
+		}
+		.gh-select-box{
+			width: 100%;
+			border: 1px solid $gh-input-border-color;
+			border-top-width:0px ;
+			box-sizing: border-box;
+			position: absolute;
+			z-index: 999999;
+			background-color: #fff;
+			.gh-selelct-list{
+				padding: 0.4375rem 0.625rem;
+				cursor: pointer;
+				&:hover{
+					background-color: #EEEEEE;
+				}
+			}
+		}
+	}
+/* 日期选择器 */ 
+.gh-date-picker{
+		width: auto;
+		border: 1px solid $gh-input-border-color;
+		box-sizing: border-box;
+		display: inline-block;
+		.date-picker-inner{
+			position: relative;
+			display: inline-block;
+			
+		}
+		.gh-year-input,.gh-month-input,.gh-day-input{
+			width: 100%;
+			position: relative;
+			input{
+				width: 100%;
+				padding:0 0.625rem;
+				line-height:1.75rem;
+				border: 0px;
+				cursor: pointer;
+				box-sizing: border-box;
+			};
+			.iconfont{
+				position: absolute;
+				top: 50%;
+				right: 10px;
+				margin-top: -9px;
+			}
+		}
+		.gh-date-select{
+			height: 200px;
+			overflow-y: auto;
+			position: absolute;
+			left: -1px;
+			width: 100%;
+			border: 1px solid $gh-input-border-color;
+			border-top-width:0px ;
+			z-index: 999999;
+			
+			.itemList{
+				padding: 0.4375rem 0.625rem;
+				cursor: pointer;
+				outline: none;
+				&:hover{
+					background-color: #EEEEEE;
+				}
+				background-color: #FFFFFF;
+			}
+		}
+	}	
+/* 列表 */
+.gh-list-box{
+	background-color: #fff;
+	margin-bottom: 1.25rem;
+	.gh-list .list-item>div{
+		padding: 0.4375rem 0.9375rem;
+		.small{
+			float: right;
+		}
+	};
+	.gh-list .list-item:after{
+		content: "";
+		display: block;
+		height: 0.125rem;
+		background-color: #f8f8f8;
+	}
+}
+/*时间选择器*/
+.gh-date-picker{
+	.pagedate{
+		display: flex;
+		justify-content: space-around;
+		div{
+			display: inline-block;
+		}
+		span{
+			cursor: pointer;
+			&:hover{
+				color: $gh-button-success;
+			}
+		}
+	}
+	.week{
+		display: flex;
+		justify-content: space-around;
+	}
+}
+ /*layout 布局*/ 
+ .gh-row{
+	 position: relative;
+	 box-sizing: border-box;
+	 &:after,&:before{
+		 display: table;
+		 content: "";
+	 }
+	 &:after{
+		 clear: both;
+	 }
+	 
+ }
+.gh-col-12 {
+ width: 50%;
+}
+[class*=gh-col-] {
+	     float: left;
+	     box-sizing: border-box;
+	 }
