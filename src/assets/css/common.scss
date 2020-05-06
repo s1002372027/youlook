@@ -5,7 +5,7 @@ $font-color-lable: #808285;
 $bg-color:#fff;
 /* 公共padding尺寸 */
 $padding: 0.4375rem 0.9375rem 0.4375rem 0.9375rem;
-/* 按钮颜色 */ 
+/* 按钮颜色 */
 $gh-button-primary:#409eff;
 $gh-button-success:#67c23a;
 $gh-button-info:#909399;
@@ -15,4 +15,16 @@ $gh-button-danger:#DA262D;
  $gh-input-border-color:#A8A9AD;
  $gh-input-border-color-active:#FF0000;
 
+/* 栅格 */
+//总格数
+$column-count: 12;
+//padding
+$gutter:30px;
+//屏幕最小宽度
+$sr-sm-min: 768px;
+$sr-md-min: 992px;
+$sr-lg-min: 1200px;
+$sr-xl-min: 1920px;
 
+//box-shadow
+$box-shadow:rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;

@@ -49,8 +49,9 @@ div,p,span{
 	padding:0.75rem 1.25rem;
 	color: #333333;
 	text-align: center;
+  cursor: pointer;
 	&.gh-button-primary{
-		color: #fff;	
+		color: #fff;
 		background-color: $gh-button-primary;
 		border: 1px solid $gh-button-primary;
 		&:active{
@@ -105,7 +106,7 @@ div,p,span{
 	&:hover{
 		opacity: 0.8;
 	}
-	
+
 }
 
 
@@ -142,7 +143,7 @@ div,p,span{
 	 -webkit-appearance: none;
 	 -moz-appearance: none;
 	 -ms-appearance: none;
-	 appearance: none;	 
+	 appearance: none;
 	 border-radius: 50%;
 	 cursor: pointer;
  	border: 4px solid #A8A9AD;
@@ -160,7 +161,7 @@ div,p,span{
  	font-size: 0.875rem;
  }
 }
-/* select 下拉列表 */ 
+/* select 下拉列表 */
 .gh-select{
 		width: 240px;
 		position: relative;
@@ -199,7 +200,7 @@ div,p,span{
 			}
 		}
 	}
-/* 日期选择器 */ 
+/* 日期选择器 */
 .gh-date-picker{
 		width: auto;
 		border: 1px solid $gh-input-border-color;
@@ -208,7 +209,7 @@ div,p,span{
 		.date-picker-inner{
 			position: relative;
 			display: inline-block;
-			
+
 		}
 		.gh-year-input,.gh-month-input,.gh-day-input{
 			width: 100%;
@@ -237,7 +238,7 @@ div,p,span{
 			border: 1px solid $gh-input-border-color;
 			border-top-width:0px ;
 			z-index: 999999;
-			
+
 			.itemList{
 				padding: 0.4375rem 0.625rem;
 				cursor: pointer;
@@ -248,7 +249,7 @@ div,p,span{
 				background-color: #FFFFFF;
 			}
 		}
-	}	
+	}
 /* 列表 */
 .gh-list-box{
 	background-color: #fff;
@@ -286,7 +287,7 @@ div,p,span{
 		justify-content: space-around;
 	}
 }
- /*layout 布局*/ 
+ /*layout 布局*/
  .gh-row{
 	 position: relative;
 	 box-sizing: border-box;
@@ -297,8 +298,9 @@ div,p,span{
 	 &:after{
 		 clear: both;
 	 }
-	 
+
  }
+
 .gh-col-12 {
  width: 50%;
 }
@@ -306,3 +308,100 @@ div,p,span{
 	     float: left;
 	     box-sizing: border-box;
 	 }
+
+//创建列的混合宏
+@mixin mark-col($col) {
+  @for $i from 1 through $column-count {
+    .gh-col-#{$col}-#{$i} {
+      position: relative;
+      min-height: 1px;
+      padding-right: $gutter/2;
+      padding-left: $gutter/2;
+      width: percentage($i/$column-count);
+      float: left;
+    }
+  }
+}
+// hidden-xs-only - 当视口在 xs 尺寸时隐藏
+// hidden-sm-only - 当视口在 sm 尺寸时隐藏
+// hidden-sm-and-down - 当视口在 sm 及以下尺寸时隐藏
+// hidden-sm-and-up - 当视口在 sm 及以上尺寸时隐藏
+// hidden-md-only - 当视口在 md 尺寸时隐藏
+// hidden-md-and-down - 当视口在 md 及以下尺寸时隐藏
+// hidden-md-and-up - 当视口在 md 及以上尺寸时隐藏
+// hidden-lg-only - 当视口在 lg 尺寸时隐藏
+// hidden-lg-and-down - 当视口在 lg 及以下尺寸时隐藏
+// hidden-lg-and-up - 当视口在 lg 及以上尺寸时隐藏
+// hidden-xl-only - 当视口在 xl 尺寸时隐藏
+@mixin hidden-col($col) {
+    .hidden-#{$col}-only {
+      display: none;
+    };
+
+}
+@mixin hidden-col-down($col) {
+    .hidden-#{$col}-and-down {
+      display: none;
+    }
+   }
+@mixin hidden-col-up($col) {
+    .hidden-#{$col}-and-up {
+      display: none;
+    }
+}
+//生成超小屏下的列
+@include mark-col(mx);
+@include hidden-col(mx);
+//小屏列隐藏
+@media (min-width: $sr-sm-min) and (max-width: $sr-md-min) {
+ @include hidden-col(sm);
+}
+//中屏列隐藏
+@media (min-width: $sr-md-min) and (max-width: $sr-lg-min) {
+  @include hidden-col(md);
+}
+//大屏列隐藏
+@media (min-width: $sr-lg-min) and (max-width: $sr-xl-min) {
+ @include hidden-col(lg);
+}
+//超大屏列隐藏
+@media (min-width: $sr-xl-min) {
+  @include hidden-col(xl);
+}
+//小屏下的列隐藏
+@media (max-width: $sr-sm-min) {
+  @include hidden-col-down(sm);
+}
+//中屏下的列隐藏
+@media (max-width: $sr-md-min) {
+  @include hidden-col-down(md);
+}
+//大屏下的列隐藏
+@media (max-width: $sr-lg-min) {
+  @include hidden-col-down(lg);
+}
+//超大屏下的列隐藏
+@media (max-width: $sr-xl-min) {
+  @include hidden-col-down(xl);
+}
+
+//生成小屏下的列 and 以上隐藏
+@media (min-width: $sr-sm-min) {
+  @include mark-col(sm);
+  @include hidden-col-up(sm);
+}
+//生成中屏下的列 and 以上隐藏
+@media (min-width: $sr-md-min) {
+  @include mark-col(md);
+  @include hidden-col-up(md);
+}
+//生成大屏下的列 and 以上隐藏
+@media (min-width: $sr-lg-min) {
+  @include mark-col(lg)
+  @include hidden-col-up(lg);
+}
+//生成大屏下的列 and 以上隐藏
+@media (min-width: $sr-xl-min) {
+  @include mark-col(xl)
+  @include hidden-col-up(xl);
+}

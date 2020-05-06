@@ -1,25 +1,17 @@
 <template>
-	<div class="gh-row">
-		<div class="">
-			
-		</div>
-	</div>
+  <div class="gh-row">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
-	export default{
-		name:"ghLayout",
-		props:{
-			type:{
-				type:String
-			},
-			size:{
-				type:String
-			}
-		}
-	}
+  export default {
+    name: "ghRow",
+    props: {
+    }
+  }
 </script>
 
 <style>
-	
+
 </style>

@@ -6,6 +6,8 @@ import ghRadio from './radio'
 import ghSelect from './select'
 import ghDatePicker from './datePicker'
 import datePicker from './datePicker/datePicker.vue'
+import ghRow from './layout'
+import ghCol from './layout/col.vue'
 const components ={
 	ghInput,
 	ghButton,
@@ -13,9 +15,11 @@ const components ={
 	ghRadio,
 	ghSelect,
 	ghDatePicker,
-	datePicker
+	datePicker,
+  ghRow,
+  ghCol
 }
- 
+
 
 const install = (Vue)=>{
 	Object.keys(components).forEach(key => {
