@@ -8,6 +8,7 @@ import ghDatePicker from './datePicker'
 import datePicker from './datePicker/datePicker.vue'
 import ghRow from './layout'
 import ghCol from './layout/col.vue'
+import ghLink from './link'
 const components ={
 	ghInput,
 	ghButton,
@@ -17,7 +18,8 @@ const components ={
 	ghDatePicker,
 	datePicker,
   ghRow,
-  ghCol
+  ghCol,
+  ghLink
 }
 
 

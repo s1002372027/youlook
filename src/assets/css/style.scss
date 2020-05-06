@@ -109,6 +109,66 @@ div,p,span{
 
 }
 
+/*链接文字 */
+ .el-link {
+     display: inline-flex;
+     flex-direction: row;
+     align-items: center;
+     justify-content: center;
+     vertical-align: middle;
+     position: relative;
+     text-decoration: none;
+     outline: none;
+     cursor: pointer;
+     padding: 0;
+     font-size: 14px;
+     font-weight: 500;
+     &.is-underline:hover:after {
+        content: "";
+         position: absolute;
+         left: 0;
+         right: 0;
+         height: 0;
+         bottom: 0;
+         border-bottom: 1px solid #409eff;
+       }
+}
+.gh-link-default{
+  color:$gh-link-default;
+  &.is-underline:hover:after {
+    border-color:$gh-link-default ;
+  }
+}
+.gh-link-primary{
+  color:$gh-link-primary;
+  &.is-underline:hover:after {
+    border-color:$gh-link-primary ;
+  }
+}
+.gh-link-success{
+  color:$gh-link-success;
+  &.is-underline:hover:after {
+    border-color:$gh-link-success ;
+  }
+}
+.gh-link-info{
+  color:$gh-link-info;
+  &.is-underline:hover:after {
+    border-color:$gh-link-info ;
+  }
+}
+.gh-link-warning{
+  color:$gh-link-warning;
+  &.is-underline:hover:after {
+    border-color:$gh-link-warning ;
+  }
+}
+.gh-link-danger{
+  color:$gh-link-danger;
+  &.is-underline:hover:after {
+    border-color:$gh-link-danger ;
+  }
+}
 
 /* 复选框 */
 .gh-checkbox{
@@ -300,10 +360,26 @@ div,p,span{
 	 }
 
  }
-
-.gh-col-12 {
- width: 50%;
+.gh-row-flex{
+    display: flex;
+ }
+ // flex 布局下的水平排列方式  start/end/center/space-around/space-between
+.is-justify-end{
+  justify-content: end;
 }
+.is-justify-center{
+  justify-content: center;
+}
+.is-justify-space-around{
+   justify-content: space-around;
+}
+.is-justify-space-between{
+  justify-content: space-between;
+}
+//栅格宽度
+
+
+
 [class*=gh-col-] {
 	     float: left;
 	     box-sizing: border-box;

@@ -17,18 +17,19 @@ address, caption, cite, code, dfn, em, strong, th, var {
 }
 a{
     text-decoration:none;
+    cursor: pointer;
 }
 a:link{
-    color:#fff;
+    opacity: 1;
 }
 a:visited{
-    color:#fff;
+    opacity: 1;
 }
 a:hover{
-    color:#fff;
+    opacity: 0.8;
 }
 a:active{
-    color:#fff;
+    opacity: 1;
 }
 input::-ms-clear{
     display:none;
@@ -41,7 +42,7 @@ input{
     margin: 0;
     outline: none;
     padding: 0;
-	
+
 }
 input::-webkit-input-placeholder{
     color: #ccc;
