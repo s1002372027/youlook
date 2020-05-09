@@ -10,7 +10,6 @@
     props: {
       href: {
         type: String,
-
       },
       target: {
         type: String

@@ -1,23 +1,73 @@
 <template>
   <div id="app" style="padding: 1.25rem;">
-	  <gh-button type="primary" size="medium">按钮</gh-button>
-	  <gh-input type="text" border="bottom"></gh-input>
-	  <gh-checkbox :label="{
+    <gh-button size="mini">按钮</gh-button>
+    <gh-input type="text" border="bottom"></gh-input>
+
+    <gh-form ref="aa" :rules="data">
+      <gh-form-item prop="name">
+        <template v-slot:label>
+          用户名：
+        </template>
+        <template v-slot:input>
+          <gh-input v-model="form.name" type="text" border="bottom"></gh-input>
+        </template>
+      </gh-form-item>
+      <gh-form-item prop="phone">
+        <template v-slot:label>
+          phone：
+        </template>
+        <template v-slot:input>
+          <gh-input v-model="form.phone" disabled type="text" border="bottom"></gh-input>
+        </template>
+      </gh-form-item>
+      <gh-form-item prop="code">
+        <template v-slot:label>
+          code：
+        </template>
+        <template v-slot:input>
+          <gh-input v-model="form.code" readonly  type="text" border="bottom"></gh-input>
+        </template>
+      </gh-form-item>
+      <gh-form-item>
+        <template v-slot:label>
+          code：
+        </template>
+        <template v-slot:input>
+          <gh-button type="primary" size="medium" @click.native="submit">按钮</gh-button>
+        </template>
+      </gh-form-item>
+    </gh-form>
+    <!-- <gh-checkbox v-model="value" :label="{
 		  float:'right',
-		  label:'选择'
+		  label:'选择',
+      value:1
 	  }"></gh-checkbox>
-	  <gh-radio name="1" :label="{
+    <gh-checkbox v-model="value" :label="{
+      float:'right',
+      label:'选择',
+      value:2
+    }"></gh-checkbox>
+    <gh-checkbox v-model="value" :label="{
+      float:'right',
+      label:'选择',
+      value:3
+    }"></gh-checkbox>
+	  <gh-radio name="1" v-model="value" :disabled="false" :label="{
 	  		  float:'right',
-	  		  label:'选择'
-	  }"></gh-radio>
-	  <gh-radio name="1" :label="{
+	  		  label:'选择',
+          value:1
+	  }" @change="change"></gh-radio>
+	  <gh-radio name="1" v-model="value" disabled :label="{
 	  		  float:'right',
-	  		  label:'选择'
-	  }"></gh-radio>
-	  <gh-radio name="1" :label="{
+	  		  label:'选择',
+          value:2
+	  }" @change="change"></gh-radio>
+	  <gh-radio name="1" v-model="value" disabled :label="{
 	  		  float:'right',
-	  		  label:'选择'
-	  }"></gh-radio>
+	  		  label:'选择',
+          value:3
+	  }" @change="change"></gh-radio>
+
 	  <gh-select></gh-select>
 	  <gh-select></gh-select>
 	  <gh-date-picker type="daterange"></gh-date-picker>
@@ -29,25 +79,67 @@
       <gh-col col="gh-col-mx-9 gh-col-sm-1 gh-col-md-6 gh-col-lg-2 gh-col-xl-2 hidden-lg-and-down" gutter="20"></gh-col>
       <gh-col col="gh-col-mx-3 gh-col-sm-9 gh-col-md-6 gh-col-lg-2 gh-col-xl-8 hidden-lg-only" gutter="20"></gh-col>
     </gh-row>
-		<!-- <datePicker></datePicker> -->
-    <gh-link type="primary" :underline="true" >防守对方的</gh-link>
+    <gh-link type="primary" :underline="true" >防守对方的</gh-link>-->
   </div>
+
 </template>
 
 <script>
+  export default {
 
-export default {
+    name: 'app',
+    data() {
+      return {
+        value: 2,
+        form: {
+          name: "",
+          phone: "",
+          code: ""
+        },
+        data: {
+          name: {
+            type: "string",
+            required: true,
+            validator: (rule, value) => {
+              return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/.test(value)
+            },
+            message: "账号长度最小6位，并包含数字和字母！"
+          },
+          phone: {
+            type: "number",
+            validator: (rule, value) => {
+              return /^1[3456789]\d{9}$/.test(value)
+            },
+            message: "电话号码不正确！"
+          },
+          code: {
+            type: "string",
+            required: true,
+            message: "请输入验证码！"
+          }
+        }
+      }
+    },
+    mounted() {
 
-  name: 'app',
-  data () {
-    return {
+    },
+    methods: {
+      change(data) {
+        console.log(data)
+      },
+      submit() {
+        this.$refs.aa.validator(this.form).then((res) => {
+          console.log(res)
+        }).catch((err)=>{
+          console.log(err)
+        })
+      }
+    },
+
+    components: {
 
     }
-  },
-  components:{
-
   }
-}
 </script>
 
 <style lang="scss">

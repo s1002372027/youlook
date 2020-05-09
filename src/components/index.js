@@ -1,4 +1,6 @@
 // sumFunction 插件对应组件的名字
+import ghForm from './form';
+import ghFormItem from './form/formItem.vue';
 import ghInput from './input';
 import ghButton from './button'
 import ghCheckbox from './checkbox'
@@ -19,7 +21,9 @@ const components ={
 	datePicker,
   ghRow,
   ghCol,
-  ghLink
+  ghLink,
+  ghFormItem,
+  ghForm
 }
 
 

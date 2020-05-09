@@ -21,8 +21,5 @@
 </script>
 
 <style>
-.col-content{
-  height: 3.125rem;
-  background-color: #000066;
-}
+
 </style>

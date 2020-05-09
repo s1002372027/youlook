@@ -1,7 +1,7 @@
 @import "./common.scss";
 
 div,p,span{
-	color: $font-color-lable;
+  color: $font-color-lable;
 }
 /* 通用属性 */
 .gh-main{
@@ -39,10 +39,35 @@ div,p,span{
 			border-right-width:1px;
 		}
 	};
+  .input-error-border{
+    border-color:$gh-input-error ;
+  }
 	.gh-input-inner:focus{
 		border-color:$gh-input-border-color-active;
 	}
 };
+/* form 表单提交*/
+ .gh-from-item{
+   display: flex;
+   justify-content: space-between;
+   label{
+     line-height: 1.8;
+   }
+   .from-item-content{
+     flex: 1;
+     padding-bottom: 15px;
+     position: relative;
+   };
+   .from-item-error{
+     font-size: 0.75rem;
+     color:$gh-input-error;
+     position: absolute;
+     left: 0;
+     bottom: 0;
+     transition: all 2s;
+   };
+
+ };
 /* 按钮控件 */
 .gh-button{
 	outline: none;
@@ -205,7 +230,7 @@ div,p,span{
 	 -ms-appearance: none;
 	 appearance: none;
 	 border-radius: 50%;
-	 cursor: pointer;
+	 cursor: inherit;
  	border: 4px solid #A8A9AD;
  	width: 0.9375rem;
  	height: 0.9375rem;
@@ -219,6 +244,10 @@ div,p,span{
  .gh-radio-label{
  	vertical-align: middle;
  	font-size: 0.875rem;
+ }
+ &.is-disabled{
+   opacity: 0.5;
+   cursor: no-drop;
  }
 }
 /* select 下拉列表 */
