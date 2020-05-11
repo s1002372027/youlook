@@ -21,9 +21,11 @@
           validator.validate(data, (errors, fields) => {
             if (errors) {
               this.$children.forEach((v)=>{
+                v.$data.isshow=false
                 errors.forEach((y)=>{
                   if(y.field==v.prop){
                     v.$data.isshow=true
+                    v.$data.text=y.message
                   }
                 })
               })

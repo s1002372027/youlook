@@ -1,26 +1,35 @@
 <template>
   <div class="gh-from-item">
-      <label class="from-item-label">
-        <slot name="label"></slot>
-      </label>
-      <div class="from-item-content">
-        <slot name="input"></slot>
-        <div  v-if="isshow" class="from-item-error">请输入密码</div>
-      </div>
+    <label class="from-item-label">
+      <slot name="label"></slot>
+    </label>
+    <div class="from-item-content">
+      <slot name="input"></slot>
+      <transition name="fade">
+        <div v-if="isshow" class="from-item-error">{{text}}</div>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
-  export default{
-    name:"formItem",
-    data(){
+  export default {
+    name: "formItem",
+    data() {
       return {
-        isshow:false
+        isshow: false,
+        text: ""
       }
     },
-    props:["prop"]
+    props: ["prop"]
   }
 </script>
 
-<style>
+<style scoped="scoped">
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
 </style>
