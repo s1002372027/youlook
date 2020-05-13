@@ -11,6 +11,7 @@ import datePicker from './datePicker/datePicker.vue'
 import ghRow from './layout'
 import ghCol from './layout/col.vue'
 import ghLink from './link'
+import ghDialog from './dialog'
 const components ={
 	ghInput,
 	ghButton,
@@ -23,7 +24,8 @@ const components ={
   ghCol,
   ghLink,
   ghFormItem,
-  ghForm
+  ghForm,
+  ghDialog
 }
 
 

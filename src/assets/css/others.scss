@@ -1,0 +1,30 @@
+.gh-dialog-box{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+  .gh-diglog{
+    background-color: #FFFFFF;
+    box-shadow: $box-shadow;
+    margin: 0 auto;
+    padding:0.9375rem 1.25rem;
+    min-width: 20%;
+    border-radius: 0.9375rem;
+  }
+  .diglog-title{
+    display: flex;
+    justify-content: space-between;
+    .close{
+      cursor: pointer;
+    }
+  }
+  .diglog-content{
+    padding: 15px 0;
+  }
+}

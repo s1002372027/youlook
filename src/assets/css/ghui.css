@@ -884,3 +884,33 @@ div, p, span {
     float: left; }
   .hidden-xl-and-up {
     display: none; } }
+
+.gh-dialog-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3); }
+
+.gh-dialog-box .gh-diglog {
+  background-color: #FFFFFF;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
+  margin: 0 auto;
+  padding: 0.9375rem 1.25rem;
+  min-width: 20%;
+  border-radius: 0.9375rem; }
+
+.gh-dialog-box .diglog-title {
+  display: flex;
+  justify-content: space-between; }
+
+.gh-dialog-box .diglog-title .close {
+  cursor: pointer; }
+
+.gh-dialog-box .diglog-content {
+  padding: 15px 0; }
