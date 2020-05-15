@@ -14,7 +14,7 @@
           </ul>
         </div>
       </div>
-      <div class="date-picker-inner" ref="month">
+      <div class="date-picker-inner" ref="month" v-if="type!='year'">
         <div class="gh-month-input">
           <input type="text" v-model="monthValue">
           <i class="iconfont icon-triangle_down_fill"></i>
@@ -27,7 +27,7 @@
           </ul>
         </div>
       </div>
-      <div class="date-picker-inner" ref="day">
+      <div class="date-picker-inner" ref="day" v-if="type!='year'&&type!='month'">
         <div class="gh-month-input">
           <input type="text" v-model="dayValue">
           <i class="iconfont icon-triangle_down_fill"></i>
@@ -147,11 +147,11 @@
     },
     computed:{
       dateValue(){
-        
+
         let val={
           year:parseInt(this.yearValue),
-          month:parseInt(this.monthValue),
-          day:parseInt(this.dayValue)
+          month:this.type!='year'?parseInt(this.monthValue):0,
+          day:this.type!='year'&&this.type!='month'?parseInt(this.dayValue):0
         }
         return val
       },

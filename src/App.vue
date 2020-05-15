@@ -91,7 +91,7 @@
     <gh-link type="primary" :underline="true" >防守对方的</gh-link>-->
    <!-- <gh-select :selectList="selectList" @change="selectchange" :isSearch="true" ></gh-select>
     <gh-select :selectList="selectList1"></gh-select> -->
-    <gh-date-picker type="daterange" ref="date"></gh-date-picker>
+    <gh-date-picker  ref="date"></gh-date-picker>
     <button @click="getdate">获取时间</button>
   </div>
 
@@ -153,7 +153,7 @@
     },
     methods: {
       getdate(){
-        console.log(this.$refs.date.dateRangeValue)
+        console.log(this.$refs.date.dateValue)
       },
       selectchange(data){
         console.log(data)
