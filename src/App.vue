@@ -79,7 +79,7 @@
 	  }" @change="change"></gh-radio>
 
 
-	  <gh-date-picker type="daterange"></gh-date-picker>
+
     <gh-row type="flex" justify="center">
       <gh-col col="gh-col-mx-9 gh-col-sm-1 gh-col-md-6 gh-col-lg-2 gh-col-xl-2 hidden-lg-and-up" gutter="20"></gh-col>
       <gh-col col="gh-col-mx-3 gh-col-sm-9 gh-col-md-6 gh-col-lg-2 gh-col-xl-8 hidden-xl-only" gutter="20"></gh-col>
@@ -89,8 +89,10 @@
       <gh-col col="gh-col-mx-3 gh-col-sm-9 gh-col-md-6 gh-col-lg-2 gh-col-xl-8 hidden-lg-only" gutter="20"></gh-col>
     </gh-row>
     <gh-link type="primary" :underline="true" >防守对方的</gh-link>-->
-    <gh-select :selectList="selectList" @change="selectchange"></gh-select>
-    <gh-select :selectList="selectList"></gh-select>
+   <!-- <gh-select :selectList="selectList" @change="selectchange" :isSearch="true" ></gh-select>
+    <gh-select :selectList="selectList1"></gh-select> -->
+    <gh-date-picker type="daterange" ref="date"></gh-date-picker>
+    <button @click="getdate">获取时间</button>
   </div>
 
 </template>
@@ -141,13 +143,18 @@
           {
             value: 3,
             label: "选项三"
-          }]
+          }
+         ],
+         selectList1:[]
       }
     },
     mounted() {
 
     },
     methods: {
+      getdate(){
+        console.log(this.$refs.date.dateRangeValue)
+      },
       selectchange(data){
         console.log(data)
       },

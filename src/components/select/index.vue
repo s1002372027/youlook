@@ -1,16 +1,19 @@
 <template>
-  <div ref="select" class="gh-select" @click="isShowList" tabindex="-1">
+  <div  ref="select" :class="{'select-disabled':disabled}"  class="gh-select" @click="isShowList" tabindex="-1" >
     <div class="gh-select-input">
-      <input type="text" :data-value="value" v-model="text" @change="change">
+      <input type="text" :data-value="value" v-model="text" :readonly="!isSearch" :disabled="disabled" >
       <i class="iconfont icon-triangle_down_fill"></i>
     </div>
     <transition name="slide-fade">
       <div v-show="isShow" class="gh-select-box">
-        <ul>
+        <ul v-if="searchSelect.length>0">
           <li v-for="item in searchSelect" :data-index="item.value" class="gh-selelct-list">
             {{item.label}}
           </li>
         </ul>
+        <div v-else class="select-no">
+            暂无数据
+        </div>
       </div>
     </transition>
   </div>
@@ -30,6 +33,14 @@
     props: {
       selectList: {
         type: Array
+      },
+      isSearch:{
+        type:Boolean,
+        default:false
+      },
+      disabled:{
+        type:Boolean,
+        default:false
       }
     },
     created() {
@@ -44,19 +55,20 @@
     },
     methods: {
       isShowList(event) {
-        if (event.target.tagName == "INPUT") {
-          this.isShow = !this.isShow
-        } else if (event.target.tagName == "LI") {
-          this.value = event.target.dataset.index
-          this.text = event.target.innerText
-          this.isShow = !this.isShow
-          this.$emit("change",{value:event.target.dataset.index,text:event.target.innerText})
+        if(!this.disabled){
+          if (event.target.tagName == "INPUT") {
+            this.isShow = !this.isShow
+          } else if (event.target.tagName == "LI") {
+            this.value = event.target.dataset.index
+            this.text = event.target.innerText
+            this.isShow = !this.isShow
+
+          }else{
+            this.isShow = !this.isShow
+          }
+
         }
-        
-      },
-      // 属性变更
-      change(){
-          
+
       }
     },
     watch: {
@@ -65,6 +77,9 @@
         this.searchSelect = data.filter((value) => {
           return value.label.includes(newValue)
         })
+      },
+      value(newValue, oldValue){
+        this.$emit("change",{value:this.value,text:this.text})
       }
     },
   }
