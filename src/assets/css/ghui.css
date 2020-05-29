@@ -252,7 +252,8 @@ div, p, span {
 /* select 下拉列表 */
 .gh-select {
   width: 240px;
-  position: relative; }
+  position: relative;
+  cursor: pointer; }
 
 .gh-select .gh-select-input {
   width: 100%;
@@ -278,15 +279,31 @@ div, p, span {
   border-top-width: 0px;
   box-sizing: border-box;
   position: absolute;
-  z-index: 999999;
-  background-color: #fff; }
+  z-index: 9999;
+  background-color: #fff;
+  max-height: 12.5rem;
+  overflow-y: auto; }
 
 .gh-select .gh-select-box .gh-selelct-list {
-  padding: 0.4375rem 0.625rem;
-  cursor: pointer; }
+  padding: 0.4375rem 0.625rem; }
 
 .gh-select .gh-select-box .gh-selelct-list:hover {
   background-color: #EEEEEE; }
+
+.gh-select .gh-select-box .gh-selelct-list .active {
+  background-color: #EEEEEE; }
+
+.gh-select .gh-select-box .select-no {
+  padding: 0.4375rem 0.625rem;
+  text-align: center;
+  font-size: 0.875rem; }
+
+.gh-select.select-disabled {
+  cursor: no-drop;
+  outline: none; }
+
+.gh-select.select-disabled input {
+  cursor: no-drop; }
 
 /* 日期选择器 */
 .gh-date-picker {
@@ -297,13 +314,14 @@ div, p, span {
 
 .gh-date-picker .date-picker-inner {
   position: relative;
-  display: inline-block; }
+  display: inline-block;
+  width: 5rem; }
 
-.gh-date-picker .gh-year-input, .gh-date-picker .gh-month-input, .gh-date-picker .gh-day-input {
+.gh-date-picker .gh-date-input {
   width: 100%;
   position: relative; }
 
-.gh-date-picker .gh-year-input input, .gh-date-picker .gh-month-input input, .gh-date-picker .gh-day-input input {
+.gh-date-picker .gh-date-input input {
   width: 100%;
   padding: 0 0.625rem;
   line-height: 1.75rem;
@@ -311,7 +329,7 @@ div, p, span {
   cursor: pointer;
   box-sizing: border-box; }
 
-.gh-date-picker .gh-year-input .iconfont, .gh-date-picker .gh-month-input .iconfont, .gh-date-picker .gh-day-input .iconfont {
+.gh-date-picker .gh-date-input .iconfont {
   position: absolute;
   top: 50%;
   right: 10px;
@@ -336,6 +354,9 @@ div, p, span {
 .gh-date-picker .gh-date-select .itemList:hover {
   background-color: #EEEEEE; }
 
+.gh-date-picker .gh-date-select .itemList.active {
+  background-color: #EEEEEE; }
+
 /* 列表 */
 .gh-list-box {
   background-color: #fff;
@@ -354,23 +375,6 @@ div, p, span {
   background-color: #f8f8f8; }
 
 /*时间选择器*/
-.gh-date-picker .pagedate {
-  display: flex;
-  justify-content: space-around; }
-
-.gh-date-picker .pagedate div {
-  display: inline-block; }
-
-.gh-date-picker .pagedate span {
-  cursor: pointer; }
-
-.gh-date-picker .pagedate span:hover {
-  color: #67c23a; }
-
-.gh-date-picker .week {
-  display: flex;
-  justify-content: space-around; }
-
 /*layout 布局*/
 .gh-row {
   position: relative;
@@ -885,6 +889,12 @@ div, p, span {
   .hidden-xl-and-up {
     display: none; } }
 
+/* 公共颜色 */
+/* 公共padding尺寸 */
+/* 按钮颜色 */
+/* link颜色 */
+/* input边框颜色*/
+/* 栅格 */
 .gh-dialog-box {
   position: fixed;
   top: 0;

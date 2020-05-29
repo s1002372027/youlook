@@ -1,47 +1,47 @@
 <template>
   <div class="gh-date-picker">
     <div style="display: inline-block;">
-      <div class="date-picker-inner" ref="year">
-        <div class="gh-year-input">
+      <div class="date-picker-inner" ref="year" v-if="hiddenInput!='year'">
+        <div class="gh-date-input">
           <input type="text" v-model="yearValue">
           <i class="iconfont icon-triangle_down_fill"></i>
         </div>
         <div v-show="isShow.year" class="gh-date-select">
           <ul>
-            <li class="itemList" v-for="item in list.year" :tabindex="item">
+            <li class="itemList" v-for="(item,index) in list.year" :class="{'active':yearActive==index}" @click="active('yearActive',index)" :tabindex="item">
               {{item}}
             </li>
           </ul>
         </div>
       </div>
-      <div class="date-picker-inner" ref="month" v-if="type!='year'">
-        <div class="gh-month-input">
+      <div class="date-picker-inner" ref="month" v-if="type!='year'&&hiddenInput!='month'">
+        <div class="gh-date-input">
           <input type="text" v-model="monthValue">
           <i class="iconfont icon-triangle_down_fill"></i>
         </div>
         <div v-show="isShow.month" class="gh-date-select">
           <ul>
-            <li class="itemList" v-for="item in list.month" :tabindex="item">
+            <li class="itemList" v-for="(item,index) in list.month" :class="{'active':monthActive==index}" @click="active('monthActive',index)" :tabindex="item">
               {{item}}
             </li>
           </ul>
         </div>
       </div>
-      <div class="date-picker-inner" ref="day" v-if="type!='year'&&type!='month'">
-        <div class="gh-month-input">
+      <div class="date-picker-inner" ref="day" v-if="type!='year'&&type!='month'&&hiddenInput!='day'">
+        <div class="gh-date-input">
           <input type="text" v-model="dayValue">
           <i class="iconfont icon-triangle_down_fill"></i>
         </div>
         <div v-show="isShow.day" class="gh-date-select">
           <ul>
-            <li class="itemList" v-for="item in list.day" :tabindex="item">
+            <li class="itemList" v-for="(item,index) in list.day" :class="{'active':dayActive==index}" @click="active('dayActive',index)" :tabindex="item">
               {{item}}
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <date-range v-if="type=='daterange'" ></date-range>
+    <date-range :hiddenInput="hiddenInput" v-if="type=='daterange'" ></date-range>
   </div>
 </template>
 
@@ -51,6 +51,9 @@
     name: "ghDatePicker",
     data() {
       return {
+        yearActive:null,
+        monthActive:null,
+        dayActive:null,
         yearValue: "",
         monthValue: "",
         dayValue: "",
@@ -68,6 +71,9 @@
     },
     props: {
       type: {
+        type: String,
+      },
+      hiddenInput:{
         type: String,
       },
       format: {
@@ -130,15 +136,13 @@
       isShowList(type, obj) {
         this.isShow[type] = !this.isShow[type]
         let val = obj.getElementsByTagName("input")[0].value
-        for (let i = 0; i < obj.querySelectorAll("[tabindex]").length; i++) {
-          this.common.removeClass(obj.querySelectorAll("[tabindex]")[i], "active")
-        }
         if (obj.querySelector("[tabindex='" + val + "']")) {
-          this.common.addClass(obj.querySelector("[tabindex='" + val + "']"), "active")
           obj.querySelector("[tabindex='" + val + "']").focus()
-
         }
 
+      },
+      active(type,index){
+          this[type]=index
       },
       selected(key, val) {
         this[key + "Value"] = val

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="padding: 1.25rem;">
+  <div id="app" style="padding: 1.25rem;background-color: #DDDDDD;">
  <!--   <gh-button size="mini">按钮</gh-button>
     <gh-input type="text" border="bottom"></gh-input>
 
@@ -91,8 +91,12 @@
     <gh-link type="primary" :underline="true" >防守对方的</gh-link>-->
    <!-- <gh-select :selectList="selectList" @change="selectchange" :isSearch="true" ></gh-select>
     <gh-select :selectList="selectList1"></gh-select> -->
-    <gh-date-picker  ref="date"></gh-date-picker>
-    <button @click="getdate">获取时间</button>
+  <!-- <gh-date-picker type="daterange" hiddenInput="year" ref="date"></gh-date-picker>
+    <button @click="getdate">获取时间</button> -->
+   <!-- <gh-time-picker  ref="date"></gh-time-picker> -->
+   <!-- <button @click="getdate">获取时间</button> -->
+   <datePicker></datePicker>
+   <input type="text" @change="changeValue" />
   </div>
 
 </template>
@@ -152,6 +156,9 @@
 
     },
     methods: {
+      changeValue(){
+        console.log(111)
+      },
       getdate(){
         console.log(this.$refs.date.dateValue)
       },

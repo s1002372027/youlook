@@ -7,31 +7,34 @@ import ghCheckbox from './checkbox'
 import ghRadio from './radio'
 import ghSelect from './select'
 import ghDatePicker from './datePicker'
+import ghTimePicker from './timePicker'
 import datePicker from './datePicker/datePicker.vue'
 import ghRow from './layout'
 import ghCol from './layout/col.vue'
 import ghLink from './link'
 import ghDialog from './dialog'
-const components ={
-	ghInput,
-	ghButton,
-	ghCheckbox,
-	ghRadio,
-	ghSelect,
-	ghDatePicker,
-	datePicker,
+
+const components = {
+  ghInput,
+  ghButton,
+  ghCheckbox,
+  ghRadio,
+  ghSelect,
+  ghDatePicker,
+  datePicker,
   ghRow,
   ghCol,
   ghLink,
   ghFormItem,
   ghForm,
-  ghDialog
+  ghDialog,
+  ghTimePicker
 }
 
 
-const install = (Vue)=>{
-	Object.keys(components).forEach(key => {
-	    Vue.component(key, components[key]);
-	});
+const install = (Vue) => {
+  Object.keys(components).forEach(key => {
+    Vue.component(key, components[key]);
+  });
 }
 export default install;

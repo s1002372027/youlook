@@ -318,7 +318,7 @@ div,p,span{
 			display: inline-block;
       width: 5rem;
 		}
-		.gh-year-input,.gh-month-input,.gh-day-input{
+		.gh-date-input{
 			width: 100%;
 			position: relative;
 			input{
@@ -336,6 +336,7 @@ div,p,span{
 				margin-top: -9px;
 			}
 		}
+    
 		.gh-date-select{
 			height: 200px;
 			overflow-y: auto;
