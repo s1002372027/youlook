@@ -95,8 +95,8 @@
     <button @click="getdate">获取时间</button> -->
    <!-- <gh-time-picker  ref="date"></gh-time-picker> -->
    <!-- <button @click="getdate">获取时间</button> -->
-   <datePicker></datePicker>
-   <input type="text" @change="changeValue" />
+   <datePicker @change="changeDate" type="daterange"></datePicker>
+   <input type="text" @change="changeValue"  />
   </div>
 
 </template>
@@ -156,6 +156,9 @@
 
     },
     methods: {
+      changeDate(data){
+        console.log(data)
+      },
       changeValue(){
         console.log(111)
       },

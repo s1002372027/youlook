@@ -1,10 +1,15 @@
 <template>
   <div class="date-picker" ref="picaker" @click="showDate">
     <div class="picaker-container">
-      <div class="picaker-inner">
-        <input type="text" @change="changeValue" v-model="dateValue" />
+      <div class="picaker-inner" v-if="type!='daterange'">
+        <input type="text" @blur="inputBlur" @focus="inputFocus" v-model="dateValue" />
       </div>
-      <div class="picaker-date-flex" v-if="isshow.isshow">
+      <div class="picaker-inner picaker-inner-daterange" v-if="type=='daterange'">
+        <input type="text" />
+        至
+        <input type="text" />
+      </div>
+      <div class="picaker-date-flex" v-if="isshow.isshow&&type!='daterange'">
         <!-- 年份选择 -->
         <div class="picaker-years" v-if="isshow.year">
           <div class="picaker-date-title">
@@ -31,7 +36,7 @@
               &lt;&lt;
             </span>
             <span class="ym-title">
-              <span>
+              <span @click.stop="showYears">
                 {{year}} 年
               </span>
             </span>
@@ -72,19 +77,23 @@
           </div>
           <div class="picaker-date-box">
             <p v-for="i in 6">
-              <span @click.stop="activeDate(item)" :class="{'font-color':item.month!=month,'date-active':item.month==month&&item.date==date}"
+              <span @click.stop="activeDate(item)" :class="{'font-color':item.month!=month,'date-active':year==activeDateVal.year&&item.month==activeDateVal.month&&item.date==activeDateVal.date}"
                 v-for="item in dates.slice((i-1)*7, (i-1)*7+7)">
-                {{item.date}} </span>
+                {{item.date}}</span>
             </p>
           </div>
         </div>
       </div>
+      <!-- 时间间断-->
+      <range v-if="rangeShow" :format="format"></range>
     </div>
 
   </div>
 </template>
 
 <script>
+  import moment from "moment"
+  import range from "./range.vue"
   export default {
     name: "ghSelect",
     data() {
@@ -95,24 +104,29 @@
           date: false,
           isshow: false
         },
+        rangeShow:false,
         weeks: ["一", "二", "三", "四", "五", "六", "日"],
         months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
         year: new Date().getFullYear(),
         month: new Date().getMonth() + 1,
         date: new Date().getDate(),
-
+        dateValue: ""
       }
     },
     props: {
-
-
+      format: {
+        type: String
+      },
+      type: {
+        type: String,
+        default: "date"
+      }
     },
     created() {
 
     },
     mounted() {
       let _this = this
-
       document.addEventListener('click', function(event) {
         const e = event || window.event
         if (_this.$refs.picaker && !_this.$refs.picaker.contains(e.target)) {
@@ -126,12 +140,18 @@
     methods: {
       showDate() {
         if (!this.isshow.isshow) {
-          this.isshow.date = true
-          this.isshow.isshow = true
+          if(this.type=="daterange"){
+            this.rangeShow = true
+          }else{
+            this.isshow[this.type] = true
+            this.isshow.isshow = true
+          }
+
         }
       },
       showYears() {
         this.isshow.date = false
+        this.isshow.month = false
         this.isshow.year = true
       },
       showMonths() {
@@ -139,21 +159,27 @@
         this.isshow.month = true
       },
       activeYear(val) {
-        this.year = val
-        this.isshow.year = false
-        this.isshow.month = true
+        if (this.type == 'year') {
+          this.getDateValue()
+        } else {
+          this.year = val
+          this.isshow.year = false
+          this.isshow.month = true
+        }
       },
       activeMonth(val) {
-        this.month = val + 1
-        this.isshow.month = false
-        this.isshow.date = true
+        if (this.type == 'month') {
+          this.getDateValue()
+        } else {
+          this.month = val + 1
+          this.isshow.month = false
+          this.isshow.date = true
+        }
       },
       activeDate(val) {
         this.month = val.month
         this.date = val.date
-        this.isshow.month = false
-        this.isshow.date = false
-        this.isshow.isshow = false
+        this.getDateValue()
       },
       prevMonth() {
         this.month = this.month - 1
@@ -169,8 +195,67 @@
           this.year = this.year + 1
         }
       },
-      changeValue() {
-        console.log(this.dateValue)
+      getDateValue() {
+        this.isshow.year = false
+        this.isshow.month = false
+        this.isshow.date = false
+        this.isshow.isshow = false
+        let dateObj = {}
+        let format=""
+        let dateVal =""
+        switch (this.type) {
+          case 'year':
+            dateObj = {
+              year: this.year
+            }
+            format=this.format?this.format:"YYYY"
+            dateVal=this.year
+            break;
+          case 'month':
+            dateObj = {
+              year: this.year,
+              month: this.month
+            }
+            format=this.format?this.format:"YYYY-MM"
+            dateVal=this.year+"-"+this.month
+            break;
+          case 'date':
+            dateObj = {
+              year: this.year,
+              month: this.month,
+              date: this.date
+            }
+            format=this.format?this.format:"YYYY-MM-DD"
+            dateVal=this.year+"-"+this.month+"-"+this.date
+            break;
+        }
+        let dateValue = moment(dateVal).format(format)
+        this.dateValue = dateValue
+        this.$emit("change",dateObj )
+      },
+      inputBlur() {
+        let e = e || event
+        let date = new Date(e.target.value)
+        if (e.target.value != "") {
+          if (date == "Invalid Date") {
+            this.dateValue = moment({
+              year: this.year,
+              month: this.month-1,
+              date: this.date
+            }).format(this.format?this.format:"YYYY-MM-DD")
+          } else {
+            let date = new Date(this.dateValue)
+            this.year = date.getFullYear()
+            this.month = date.getMonth()+1
+            this.date = date.getDate()
+          }
+        }
+
+
+        this.$emit("blur", this.dateValue)
+      },
+      inputFocus() {
+        this.$emit("blur", this.dateValue)
       }
     },
     computed: {
@@ -211,21 +296,24 @@
         let oneDateWeek = new Date(this.year, this.month - 1, 1).getDay()
         return oneDateWeek == 0 ? 7 : oneDateWeek
       },
-      dateValue: {
-        get() {
-          let dateValue = this.year + "-" + (this.month < 10 ? '0' + this.month : this.month) + "-" + (this.date < 10 ?
-            '0' + this.date : this.date)
-          return dateValue
-        },
-        set(val){
-          console.log(val)
+      activeDateVal(){
+        if(this.dateValue!=""){
+          var date = new Date(this.dateValue)
+        }else{
+          var date = new Date()
         }
-      },
-
+        let year = date.getFullYear()
+        let month = date.getMonth()+1
+        let day = date.getDate()
+        return {year:year,month:month,date:day}
+      }
     },
     watch: {
 
     },
+    components:{
+      range
+    }
   }
 </script>
 <style lang="scss" scoped="scoped">
@@ -234,21 +322,29 @@
       position: relative;
 
       .picaker-inner {
-        width: 13.75rem;
+
         border: 1px solid #cccccc;
         border-radius: 5px;
-
+        display: inline-block;
         input {
           padding: 7px 9px;
           border-radius: 5px;
           font-size: 16px;
           border: 0px;
-          width: 100%;
+          width: 13.75rem;
           box-sizing: border-box;
         }
       }
-
+       .picaker-inner-daterange{
+         background-color: #fff;
+         input{
+           width: 10rem;
+         }
+       }
       .picaker-date-flex {
+
+        left: 0px;
+        top: 40px;
         background-color: #FFFFFF;
         padding: 10px;
         position: absolute;
